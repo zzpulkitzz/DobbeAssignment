@@ -12,7 +12,9 @@ dependencies = [
     "google-genai>=1.26.0",
     "itsdangerous>=2.2.0",
     "mcp[cli]>=1.11.0",
+    "nodemon>=0.1.1",
     "psycopg2>=2.9.10",
     "sqlalchemy>=2.0.41",
+    "supervisor>=4.2.5",
     "twilio>=9.6.5",
 ]
