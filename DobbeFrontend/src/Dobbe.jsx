@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, User, Bot, Calendar, Clock, UserCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Send, User, Bot, Calendar, Clock, UserCheck, MessageCircle, Stethoscope, FileText } from 'lucide-react';
 
 // Helper: Chat message bubble
 const ChatMessage = ({ message }) => (
@@ -45,6 +44,128 @@ const ChatInput = ({ inputMessage, setInputMessage, handleSendMessage, handleKey
   </div>
 );
 
+// NEW: Suggestion Queries Component
+const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
+  const patientSuggestions = [
+    {
+      icon: Calendar,
+      text: "Book an appointment with a cardiologist",
+      category: "Booking",
+      color: "bg-blue-500"
+    },
+    {
+      icon: Clock,
+      text: "What are Dr. Smith's available slots this week?",
+      category: "Availability",
+      color: "bg-green-500"
+    },
+    {
+      icon: UserCheck,
+      text: "Find orthopedic doctors near me",
+      category: "Search",
+      color: "bg-purple-500"
+    },
+    {
+      icon: MessageCircle,
+      text: "Reschedule my appointment for tomorrow",
+      category: "Manage",
+      color: "bg-orange-500"
+    },
+    {
+      icon: FileText,
+      text: "Show my upcoming appointments",
+      category: "View",
+      color: "bg-teal-500"
+    },
+    {
+      icon: Stethoscope,
+      text: "I need to see a dermatologist urgently",
+      category: "Urgent",
+      color: "bg-red-500"
+    }
+  ];
+
+  const doctorSuggestions = [
+    {
+      icon: Calendar,
+      text: "Show my schedule for today",
+      category: "Schedule",
+      color: "bg-blue-500"
+    },
+    {
+      icon: FileText,
+      text: "Generate appointment summary for this week",
+      category: "Reports",
+      color: "bg-green-500"
+    },
+    {
+      icon: UserCheck,
+      text: "List all my patients for tomorrow",
+      category: "Patients",
+      color: "bg-purple-500"
+    },
+    {
+      icon: Clock,
+      text: "Block my calendar from 2-4 PM today",
+      category: "Manage",
+      color: "bg-orange-500"
+    },
+    {
+      icon: Stethoscope,
+      text: "Show patient medical history for John Doe",
+      category: "History",
+      color: "bg-teal-500"
+    },
+    {
+      icon: MessageCircle,
+      text: "Cancel my 3 PM appointment",
+      category: "Cancel",
+      color: "bg-red-500"
+    }
+  ];
+
+  // Determine which suggestions to show based on user type
+  const suggestions = user?.type === 'doctor' ? doctorSuggestions : patientSuggestions;
+  const userTypeLabel = user?.type === 'doctor' ? 'Doctor' : 'Patient';
+
+  if (!showSuggestions) return null;
+
+  return (
+    <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b">
+      <div className="mb-3">
+        <h3 className="text-lg font-semibold text-gray-800 mb-1">
+          {user ? `${userTypeLabel} Suggestions` : 'Try asking me about:'}
+        </h3>
+        <p className="text-sm text-gray-600">
+          Click on any suggestion below to get started
+        </p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {suggestions.map((suggestion, index) => (
+          <button
+            key={index}
+            onClick={() => onSuggestionClick(suggestion.text)}
+            className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 text-left border border-gray-200"
+          >
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${suggestion.color}`}>
+              <suggestion.icon className="w-5 h-5 text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                {suggestion.text}
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                {suggestion.category}
+              </p>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Dobbe = () => {
   const [messages, setMessages] = useState([
     {
@@ -57,9 +178,8 @@ const Dobbe = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [user, setUser] = useState(null);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef(null);
-
-
 
   useEffect(() => {
     console.log('useEffect fired');
@@ -70,13 +190,19 @@ const Dobbe = () => {
       });
   }, []);
 
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
+  }, [messages]);
+
+  // Hide suggestions after first user message
+  useEffect(() => {
+    if (messages.length > 1 && messages.some(msg => msg.sender === 'user')) {
+      setShowSuggestions(false);
+    }
   }, [messages]);
 
   // NEW: Real API call
@@ -98,18 +224,19 @@ const Dobbe = () => {
 
   function logoutUser() {
     try{
-    window.location.href = `${import.meta.env.VITE_API_URL}/logout`;
+      window.location.href = `${import.meta.env.VITE_API_URL}/logout`;
     }catch(err){
       console.log(err);
     }
   }
 
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return;
+  const handleSendMessage = async (messageText = null) => {
+    const textToSend = messageText || inputMessage;
+    if (!textToSend.trim()) return;
 
     const userMessage = {
       id: messages.length + 1,
-      text: inputMessage,
+      text: textToSend,
       sender: 'user',
       timestamp: new Date()
     };
@@ -119,7 +246,7 @@ const Dobbe = () => {
     setIsTyping(true);
 
     // Real API call
-    const botReply = await fetchBotResponse(inputMessage);
+    const botReply = await fetchBotResponse(textToSend);
 
     const botMessage = {
       id: messages.length + 2,
@@ -136,6 +263,11 @@ const Dobbe = () => {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  // NEW: Handle suggestion click
+  const handleSuggestionClick = (suggestionText) => {
+    handleSendMessage(suggestionText);
   };
 
   const quickActions = [
@@ -160,12 +292,12 @@ const Dobbe = () => {
           </div>
           <div className="flex space-x-2">
             {user ? (
-              <Link onClick={logoutUser} className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+              <button onClick={logoutUser} className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
               Sign Out
-            </Link>):(
-            <Link to="/login"  className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+            </button>):(
+            <button className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
             Sign In
-          </Link>)}
+          </button>)}
             <button className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
               {user ? `Hello ${user.name}` : "Guest"}
             </button>
@@ -177,6 +309,17 @@ const Dobbe = () => {
       <div className="flex-1 max-w-4xl mx-auto w-full flex flex-col">
         {/* Quick Actions */}
         <div className="p-4 bg-white border-b">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-sm font-medium text-gray-700">Quick Actions</h3>
+            {!showSuggestions && (
+              <button
+                onClick={() => setShowSuggestions(true)}
+                className="text-xs text-blue-600 hover:text-blue-700 underline"
+              >
+                Show suggestions
+              </button>
+            )}
+          </div>
           <div className="flex space-x-3 overflow-x-auto">
             {quickActions.map((action, index) => (
               <button
@@ -190,6 +333,13 @@ const Dobbe = () => {
             ))}
           </div>
         </div>
+
+        {/* NEW: Suggestion Queries */}
+        <SuggestionQueries 
+          onSuggestionClick={handleSuggestionClick} 
+          user={user}
+          showSuggestions={showSuggestions}
+        />
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -220,7 +370,7 @@ const Dobbe = () => {
         <ChatInput
           inputMessage={inputMessage}
           setInputMessage={setInputMessage}
-          handleSendMessage={handleSendMessage}
+          handleSendMessage={() => handleSendMessage()}
           handleKeyPress={handleKeyPress}
         />
       </div>
