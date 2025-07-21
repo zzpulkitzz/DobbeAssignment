@@ -73,4 +73,4 @@ websockets==15.0.1
 yarl==1.20.1
 supervisor
 uv
-mcp[cli]
+"mcp[cli]"
