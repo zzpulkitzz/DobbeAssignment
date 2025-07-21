@@ -25,4 +25,7 @@ RUN uv add "mcp[cli]"
 # RUN uv pip install -e /app
 
 # Start the app with supervisord
-CMD ["supervisord", "-c", "supervisord.conf"]
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+CMD ["/app/start.sh"]
