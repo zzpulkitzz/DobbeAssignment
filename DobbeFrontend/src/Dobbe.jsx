@@ -1,18 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, User, Bot, Calendar, Clock, UserCheck, MessageCircle, Stethoscope, FileText } from 'lucide-react';
+import {Link} from "react-router-dom"
 
 // Helper: Chat message bubble
 const ChatMessage = ({ message }) => (
   <div className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
     <div className={`flex items-start space-x-3 max-w-xs sm:max-w-md md:max-w-lg ${message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${message.sender === 'user' ? 'bg-slate-900' : 'bg-gray-200'}`}>
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${message.sender === 'user' ? 'bg-gray-800' : 'bg-gray-200'}`}>
         {message.sender === 'user' ? 
           <User className="w-4 h-4 text-white" /> : 
           <Bot className="w-4 h-4 text-gray-600" />
         }
       </div>
-      <div className={`rounded-2xl px-4 py-3 ${message.sender === 'user' ? 'bg-slate-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-        <p className="text-sm whitespace-pre-line font-medium">{message.text}</p>
+      <div className={`rounded-2xl px-4 py-3 ${message.sender === 'user' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'}`}>
+        <p className="text-sm whitespace-pre-line font-light">{message.text}</p>
         <p className={`text-xs mt-2 ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>
           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </p>
@@ -36,7 +37,7 @@ const ChatInput = ({ inputMessage, setInputMessage, handleSendMessage, handleKey
       <button
         onClick={handleSendMessage}
         disabled={!inputMessage.trim()}
-        className="px-4 py-3 bg-slate-900 text-white rounded-2xl hover:bg-slate-800 disabled:bg-gray-200 disabled:cursor-not-allowed transition-colors"
+        className="px-4 py-3 bg-gray-800 text-white rounded-2xl hover:bg-gray-700 disabled:bg-gray-200 disabled:cursor-not-allowed transition-colors"
       >
         <Send className="w-4 h-4" />
       </button>
@@ -88,7 +89,7 @@ const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
           <button
             key={index}
             onClick={() => onSuggestionClick(suggestion.text)}
-            className="p-3 text-left bg-white border border-gray-200 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="p-3 text-left bg-white border border-gray-200 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 text-sm font-light text-gray-700 hover:text-gray-900"
           >
             {suggestion.text}
           </button>
@@ -208,7 +209,7 @@ const Dobbe = () => {
       <header className="bg-white border-b border-gray-200 p-4 shadow-sm">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-slate-900 rounded-2xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -218,12 +219,12 @@ const Dobbe = () => {
           </div>
           <div className="flex space-x-3">
             {user ? (
-              <button onClick={logoutUser} className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+              <Link onClick={logoutUser} className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
               Sign Out
-            </button>):(
-            <button className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+            </Link>):(
+            <Link to="/login" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
             Sign In
-          </button>)}
+          </Link>)}
             <div className="px-4 py-2 bg-slate-100 rounded-xl text-sm font-medium text-gray-700">
               {user ? `${user.name}` : "Guest"}
             </div>
@@ -242,7 +243,7 @@ const Dobbe = () => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="flex items-start space-x-2">
-                <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
                   <Bot className="w-4 h-4 text-white" />
                 </div>
                 <div className="bg-gray-100 rounded-lg p-3">
