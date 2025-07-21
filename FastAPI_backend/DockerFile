@@ -16,6 +16,7 @@ COPY . .
 
 # Use uv to install dependencies (from requirements.txt or pyproject.toml)
 RUN uv add -r requirements.txt
+RUN uv add "mcp[cli]"
 # OR
 # RUN uv pip install -e .    # If using pyproject.toml
 
