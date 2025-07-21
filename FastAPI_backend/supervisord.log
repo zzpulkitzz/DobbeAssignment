@@ -1,0 +1,63 @@
+2025-07-21 23:32:09,744 INFO supervisord started with pid 62919
+2025-07-21 23:32:10,748 INFO spawned: 'fastapi' with pid 62923
+2025-07-21 23:32:10,750 INFO spawned: 'mcp' with pid 62924
+2025-07-21 23:32:11,330 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:32:12,332 INFO success: fastapi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:32:12,335 INFO spawned: 'mcp' with pid 62931
+2025-07-21 23:32:12,844 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:32:14,847 INFO spawned: 'mcp' with pid 62938
+2025-07-21 23:32:15,346 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:32:18,353 INFO spawned: 'mcp' with pid 62947
+2025-07-21 23:32:18,852 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:32:19,854 INFO gave up: mcp entered FATAL state, too many start retries too quickly
+2025-07-21 23:37:47,336 WARN received SIGINT indicating exit request
+2025-07-21 23:37:47,339 INFO waiting for fastapi to die
+2025-07-21 23:37:48,513 WARN stopped: fastapi (terminated by SIGTERM)
+2025-07-21 23:37:57,251 INFO supervisord started with pid 63481
+2025-07-21 23:37:58,254 INFO spawned: 'fastapi' with pid 63485
+2025-07-21 23:37:58,255 INFO spawned: 'mcp' with pid 63486
+2025-07-21 23:37:58,880 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:37:59,688 INFO success: fastapi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:38:00,694 INFO spawned: 'mcp' with pid 63495
+2025-07-21 23:38:01,204 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:38:03,210 INFO spawned: 'mcp' with pid 63504
+2025-07-21 23:38:03,718 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:38:06,724 INFO spawned: 'mcp' with pid 63510
+2025-07-21 23:38:07,236 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:38:08,237 INFO gave up: mcp entered FATAL state, too many start retries too quickly
+2025-07-21 23:38:43,288 WARN received SIGINT indicating exit request
+2025-07-21 23:38:43,291 INFO waiting for fastapi to die
+2025-07-21 23:38:44,519 WARN stopped: fastapi (terminated by SIGTERM)
+2025-07-21 23:41:19,953 INFO supervisord started with pid 64444
+2025-07-21 23:41:20,959 INFO spawned: 'fastapi' with pid 64446
+2025-07-21 23:41:20,961 INFO spawned: 'mcp' with pid 64447
+2025-07-21 23:41:21,573 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:41:22,372 INFO success: fastapi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:41:23,378 INFO spawned: 'mcp' with pid 64456
+2025-07-21 23:41:23,888 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:41:25,893 INFO spawned: 'mcp' with pid 64459
+2025-07-21 23:41:26,401 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:41:29,410 INFO spawned: 'mcp' with pid 64466
+2025-07-21 23:41:29,908 WARN exited: mcp (exit status 2; not expected)
+2025-07-21 23:41:30,909 INFO gave up: mcp entered FATAL state, too many start retries too quickly
+2025-07-21 23:51:47,076 WARN received SIGINT indicating exit request
+2025-07-21 23:51:47,083 INFO waiting for fastapi to die
+2025-07-21 23:51:48,264 WARN stopped: fastapi (terminated by SIGTERM)
+2025-07-21 23:51:50,930 INFO supervisord started with pid 64875
+2025-07-21 23:51:51,935 INFO spawned: 'fastapi' with pid 64881
+2025-07-21 23:51:51,938 INFO spawned: 'mcp' with pid 64882
+2025-07-21 23:51:52,940 INFO success: fastapi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:51:52,940 INFO success: mcp entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:53:22,530 WARN received SIGINT indicating exit request
+2025-07-21 23:53:22,530 INFO waiting for fastapi, mcp to die
+2025-07-21 23:53:22,547 WARN stopped: mcp (exit status 1)
+2025-07-21 23:53:23,752 WARN stopped: fastapi (terminated by SIGTERM)
+2025-07-21 23:53:25,243 INFO supervisord started with pid 65070
+2025-07-21 23:53:26,249 INFO spawned: 'fastapi' with pid 65075
+2025-07-21 23:53:26,265 INFO spawned: 'mcp' with pid 65076
+2025-07-21 23:53:27,267 INFO success: fastapi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:53:27,267 INFO success: mcp entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-07-21 23:53:37,701 WARN received SIGINT indicating exit request
+2025-07-21 23:53:37,702 INFO waiting for fastapi, mcp to die
+2025-07-21 23:53:37,713 WARN stopped: mcp (exit status 1)
+2025-07-21 23:53:37,917 WARN stopped: fastapi (terminated by SIGTERM)
