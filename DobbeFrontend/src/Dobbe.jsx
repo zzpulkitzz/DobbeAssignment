@@ -49,16 +49,16 @@ const ChatInput = ({ inputMessage, setInputMessage, handleSendMessage, handleKey
 const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
   const patientSuggestions = [
     {
-      text: "Book an appointment with a cardiologist"
+      text: "Book an appointment with Dr. Alice"
     },
     {
-      text: "What are Dr. Smith's available slots this week?"
+      text: "What are Dr. Bob's available slots today?"
     },
     {
-      text: "Find orthopedic doctors near me"
+      text: "Does Dr. Carol work here"
     },
     {
-      text: "Show my upcoming appointments"
+      text: "Is Dr. Gupta free tomorrow?"
     }
   ];
 
@@ -78,7 +78,7 @@ const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
   ];
 
   // Determine which suggestions to show based on user type
-  const suggestions = user?.type === 'doctor' ? doctorSuggestions : patientSuggestions;
+  const suggestions = user?.role === 'doctor' ? doctorSuggestions : patientSuggestions;
 
   if (!showSuggestions) return null;
 
@@ -89,7 +89,7 @@ const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
           <button
             key={index}
             onClick={() => onSuggestionClick(suggestion.text)}
-            className="p-3 text-left bg-white border border-gray-200 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 text-sm font-light text-gray-700 hover:text-gray-900"
+            className="p-3 text-left bg-white border border-gray-200 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 text-sm font-light text-gray-700 hover:text-gray-900 flex justify-center items-center"
           >
             {suggestion.text}
           </button>
