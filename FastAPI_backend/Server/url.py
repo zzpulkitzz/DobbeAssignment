@@ -3,7 +3,7 @@ from pydantic import BaseModel, field_validator
 from typing import List
 from datetime import date,datetime
 from Server.database import get_availability_for_doctor, store_appointment
-from Server.Google_Calender.create_event import create_calendar_event
+
 from Server.Email.email_utils import send_email_confirmation
 from Server.database import listDoctors
 import httpx
