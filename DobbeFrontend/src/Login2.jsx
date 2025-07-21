@@ -34,7 +34,7 @@ export default function Login() {
 
     try {
       // OAuth login should be a redirect, not a fetch
-      window.location.href = 'http://localhost:8060/login';
+      window.location.href = `${import.meta.env.VITE_API_URL}/login`;
     } catch (err) {
       setError('Failed to initiate authentication. Please try again.');
       setLoading(null);

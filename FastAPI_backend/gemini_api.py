@@ -64,7 +64,7 @@ async def login(request: Request):
 @app.get('/logout')
 async def logout(request: Request):
     request.session.pop('user', None)
-    return RedirectResponse(url="http://localhost:5173/login")
+    return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}/login")
 
 @app.get('/auth/callback')
 async def auth_callback(request: Request):
@@ -91,7 +91,7 @@ async def auth_callback(request: Request):
             session.add(doctor)
             request.session['user'] = {'name': doctor.name, 'email': token['userinfo']['email'],"role":role}
             session.commit()
-            return RedirectResponse(url="http://localhost:5173/whatsapp")
+            return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}/whatsapp")
     else:
         user = session.query(User).filter_by(email=token['userinfo']['email']).first()
         if user:
@@ -113,7 +113,7 @@ async def auth_callback(request: Request):
     request.session['user'] = {'name': token['userinfo']['name'], 'email': token['userinfo']['email'],"role":role}
     
 
-    return RedirectResponse(url="http://localhost:5173/")
+    return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}")
 
 @app.get('/me')
 def get_user(request: Request):

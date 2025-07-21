@@ -62,7 +62,7 @@ export default function WhatsAppRegistration() {
   };
 
   const handleComplete = () => {
-    fetch('http://localhost:8060/whatsapp', { method:"POST",credentials: 'include',body:JSON.stringify({phone_number:phoneNumber}) })
+    fetch(`${import.meta.env.VITE_API_URL}/whatsapp`, { method:"POST",credentials: 'include',body:JSON.stringify({phone_number:phoneNumber}) })
     .then(res => res.json())
     .then(data => {
         console.log(data)

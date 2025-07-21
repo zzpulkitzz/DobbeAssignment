@@ -10,6 +10,7 @@ import httpx
 from twilio.rest import Client
 import os
 
+
 router = APIRouter()
 
 class AvailabilityInput(BaseModel):
@@ -91,7 +92,7 @@ def register_tools(mcp):
 
         async with httpx.AsyncClient() as client:
             response = await client.post(
-        "http://localhost:8060/create_event",
+        (os.getenv("API_URL")+"/create_event"),
         json=data.model_dump() 
     )
         result2 = response.json()

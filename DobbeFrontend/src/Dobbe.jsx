@@ -59,11 +59,11 @@ const Dobbe = () => {
   const [user, setUser] = useState(null);
   const messagesEndRef = useRef(null);
 
-  console.log(user)
-  
+
+
   useEffect(() => {
     console.log('useEffect fired');
-    fetch('http://localhost:8060/me', { credentials: 'include' })
+    fetch(`${import.meta.env.VITE_API_URL}/me`, { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if (!data.error) setUser(data.user);
@@ -82,7 +82,7 @@ const Dobbe = () => {
   // NEW: Real API call
   const fetchBotResponse = async (userMessage) => {
     try {
-      const res = await fetch('http://localhost:8060/ask', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/ask`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -98,7 +98,7 @@ const Dobbe = () => {
 
   function logoutUser() {
     try{
-    window.location.href = "http://localhost:8060/logout";
+    window.location.href = `${import.meta.env.VITE_API_URL}/logout`;
     }catch(err){
       console.log(err);
     }
