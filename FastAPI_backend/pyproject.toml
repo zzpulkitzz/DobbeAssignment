@@ -1,5 +1,5 @@
 [project]
-name = "claude_demo"
+name = "gemini_api"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

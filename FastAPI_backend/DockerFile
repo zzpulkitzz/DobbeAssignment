@@ -19,7 +19,7 @@ RUN uv add -r requirements.txt
 RUN uv add "mcp[cli]"
 # OR
 # RUN uv pip install -e .    # If using pyproject.toml
-RUN uv pip install -e .
+
 # If using pyproject.toml and it's in a subdirectory:
 # WORKDIR /app/backend
 # RUN uv pip install -e /app
