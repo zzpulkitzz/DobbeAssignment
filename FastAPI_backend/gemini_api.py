@@ -16,6 +16,7 @@ from Server.models import User,Doctor
 from Server.url import AppointmentInput
 from datetime import datetime
 from datetime import timedelta
+from fastapi.middleware.cors import CORSMiddleware
 import httpx
 load_dotenv()
 gemini_client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -23,8 +24,8 @@ gemini_client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 app = FastAPI()
 engine = create_engine(os.getenv("DATABASE_URL"))
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY"))
-from fastapi.middleware.cors import CORSMiddleware
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://dobbeassignment-production.up.railway.app"],
@@ -32,6 +33,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY"))
+
+
 
 oauth = OAuth()
 oauth.register(
