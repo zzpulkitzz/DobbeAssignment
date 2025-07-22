@@ -116,7 +116,7 @@ const Dobbe = () => {
 
   useEffect(() => {
     console.log('useEffect fired');
-    fetch(`${import.meta.env.VITE_API_URL}/me`, { credentials: 'include' })
+    fetch(`${import.meta.env.VITE_API_URL}me`, { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if (!data.error) setUser(data.user);
