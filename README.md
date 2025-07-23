@@ -45,15 +45,15 @@ uv add -r requirements.txt
 
 2.For MCP tools:-
 uv add "mcp[cli]"
-
+  
 3.Running the backend server:  
 cd FastAPI_backend  
 uvicorn gemini_api:app --port 8060  
-
+  
 4.Running the MCP server:-  
 cd FastAPI_backend/Server  
 mcp run Server/server.py --transport=sse  
-
+  
 5.Running the React App:-  
 cd DobbeFrontend  
 npm run dev
