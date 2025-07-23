@@ -13,7 +13,7 @@ It helps:
 
 ---
 
-##Core Technologies
+**Core Technologies**
 
 - **Google Gemini Flash 2.5**: Handles natural language understanding and tool orchestration.
 - **FastMCP**: The official Python SDK implementing the Model Context Protocol (MCP) for dynamic tool usage.
