@@ -1,4 +1,6 @@
-[(https://img.youtube.com/vi/HxrKmgEiQhw/hqdefault.jpg)](https://www.youtube.com/watch?v=HxrKmgEiQhw)
+Watch this video for a Demo-
+
+[![Watch the video](https://img.youtube.com/vi/HxrKmgEiQhw/hqdefault.jpg)](https://www.youtube.com/watch?v=HxrKmgEiQhw)
 
 
 Smart Healthcare Assistant
