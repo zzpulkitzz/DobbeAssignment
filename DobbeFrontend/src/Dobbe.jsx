@@ -113,7 +113,7 @@ const Dobbe = () => {
   const [user, setUser] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef(null);
-
+  console.log(user)
   useEffect(() => {
     console.log('useEffect fired');
     fetch(`${import.meta.env.VITE_API_URL}me`, { credentials: 'include' })
@@ -141,7 +141,7 @@ const Dobbe = () => {
   // NEW: Real API call
   const fetchBotResponse = async (userMessage) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/ask`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}ask`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -157,7 +157,7 @@ const Dobbe = () => {
 
   function logoutUser() {
     try{
-      window.location.href = `${import.meta.env.VITE_API_URL}/logout`;
+      window.location.href = `${import.meta.env.VITE_API_URL}logout`;
     }catch(err){
       console.log(err);
     }

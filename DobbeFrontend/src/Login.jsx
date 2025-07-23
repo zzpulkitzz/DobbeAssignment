@@ -40,7 +40,7 @@ export default function Login() {
 
     try {
         console.log(selectedRole)
-        window.location.href = `${import.meta.env.VITE_API_URL}/login?role=${selectedRole}`;
+        window.location.href = `${import.meta.env.VITE_API_URL}login?role=${selectedRole}`;
     
     } catch (err) {
         setError('Failed to initiate authentication. Please try again.');
