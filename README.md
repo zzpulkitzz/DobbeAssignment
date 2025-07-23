@@ -35,13 +35,13 @@ Tools Provided to the LLM:-
 
 ---
 
-##  Installation & Setup
+##  Installation & Setup  
 
-### 1. Clone the Project
-git clone https://github.com/your-username/dobbe-assistant.git
-cd dobbe-assistant
-pip install uv
-uv add -r requirements.txt
+### 1. Clone the Project  
+git clone https://github.com/your-username/dobbe-assistant.git  
+cd dobbe-assistant  
+pip install uv  
+uv add -r requirements.txt  
 
 For MCP tools:-
 uv add "mcp[cli]"
