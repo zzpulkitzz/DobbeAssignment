@@ -1,6 +1,9 @@
-Dobbe — Smart Healthcare Assistant
+[![Watch the video for demo](https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=HxrKmgEiQhw)
 
-Dobbe is an agentic web app for managing doctor appointments, powered by AI and context-aware scheduling.
+
+Smart Healthcare Assistant
+
+This is an agentic web app for managing doctor appointments, powered by AI and context-aware scheduling.
 
 It helps:
 - Patients: book appointments with doctors using natural language.
