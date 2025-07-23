@@ -78,10 +78,9 @@ def addCol():
 def deleteEntry():
     session = SessionLocal()
     try:
-        deleted = session.query(Doctor).filter(Doctor.email == "gsonal87@gmail.com")
-        print(deleted.email)
+        deleted = session.query(Appointment).delete()
         session.commit()
-        print(f"Deleted {deleted} doctors from the database.")
+        print(f"Deleted {deleted} appointments from the database.")
     finally:
         session.close()
 

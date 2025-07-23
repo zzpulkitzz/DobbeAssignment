@@ -7,7 +7,7 @@ async def test_call_tool():
         async with ClientSession(read_stream, write_stream) as session:
 
             await session.initialize()
-            result = await session.call_tool("prepare_report", {"report":"hey there doctor","doctor_number":""})
+            result = await session.call_tool("sendReport", {"report":"Hello", "doctor_number":"+918126293202"})
             print(result)
 
 asyncio.run(test_call_tool())

@@ -67,18 +67,18 @@ def register_tools(mcp):
         """Get the available slots for a doctor on a specific date.    
         """
         print(f"[TOOL CALL] get_doctor_availability called with: {data}")
-        result = get_availability_for_doctor(data.doctor_name, data.date)[0]
+        result = get_availability_for_doctor(data.doctor_name, data.date)[0]["data"]
         print(f"[TOOL RETURN] get_doctor_availability returned: {result}")
-        return result
+        return {"time":str(result)}
 
     @mcp.tool()
-    def get_doctor_appointments(data: AvailabilityInput) -> List[Slot]:
+    def get_doctor_appointments(data: AvailabilityInput) -> Slot:
         """Get the appointments for a doctor on a specific date.    
         """
         print(f"[TOOL CALL] get_doctor_appointments called with: {data}")
-        result = get_availability_for_doctor(data.doctor_name, data.date)[1]
+        result = get_availability_for_doctor(data.doctor_name, data.date)[1]["data"]
         print(f"[TOOL RETURN] get_doctor_appointments returned: {result}")
-        return result
+        return {"time":str(result)}
 
     @mcp.tool()
     async def create_appointment(data: AppointmentInput) -> dict:
@@ -91,8 +91,7 @@ def register_tools(mcp):
 
 
         async with httpx.AsyncClient() as client:
-            response = await client.post(
-        (os.getenv("API_URL")+"/create_event"),
+            response = await client.post(str(os.getenv("API_URL")+"create_event"),
         json=data.model_dump() 
     )
         result2 = response.json()

@@ -129,7 +129,7 @@ def get_availability_for_doctor(doctor_name: str, date: datetime.date):
                     slot,
                 )
 
-        return [{"status": "success", "message": "Available Slots Fetched Successfully", "data": result},{"status": "success", "message": "Booked Slots Fetched Successfully", "data": booked_times}]
+        return [{"status": "success", "message": "Available Slots Fetched Successfully", "data": result},{"status": "success", "message": "Busy Slots Fetched Successfully", "data": booked_times}]
     except(Exception) as e:
         return {"status": "error", "message": "Failed to get availability for doctor " + str(e)}
     finally:

@@ -28,7 +28,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://dobbeassignment-production.up.railway.app"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -68,7 +68,7 @@ async def login(request: Request):
 @app.get('/logout')
 async def logout(request: Request):
     request.session.pop('user', None)
-    return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}/login")
+    return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}login")
 
 @app.get('/auth/callback')
 async def auth_callback(request: Request):
@@ -83,10 +83,9 @@ async def auth_callback(request: Request):
         if user:
             user.access_token = token['access_token']
             user.refresh_token = token['refresh_token']
-            request.session['user'] = {'name': user.name, 'email': token['userinfo']['email'],"role":role}
+            request.session['user'] = {'name': user.name, 'email': token['userinfo']['email'],"role":role,"phonenum":user.phonenum}
             session.commit()
         else:
-            print("hereeee")
             doctor=Doctor(
                 name="Dr. "+token['userinfo']['name'],
                 email=token['userinfo']['email'],
@@ -95,7 +94,7 @@ async def auth_callback(request: Request):
             session.add(doctor)
             request.session['user'] = {'name': doctor.name, 'email': token['userinfo']['email'],"role":role}
             session.commit()
-            return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}/whatsapp")
+            return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}whatsapp")
     else:
         user = session.query(User).filter_by(email=token['userinfo']['email']).first()
         if user:
@@ -110,18 +109,20 @@ async def auth_callback(request: Request):
             access_token=token['access_token'],
             refresh_token=token['refresh_token'])
             session.add(user)
-            session.commit()
+            
 
     
     
-    request.session['user'] = {'name': token['userinfo']['name'], 'email': token['userinfo']['email'],"role":role}
+        request.session['user'] = {'name': token['userinfo']['name'], 'email': token['userinfo']['email'],"role":role}
     
 
     return RedirectResponse(url=f"{os.getenv('FRONTEND_URL')}")
 
 @app.get('/me')
 def get_user(request: Request):
+
     user = request.session.get('user')
+    print("SESSION USER:", request.session.get('user'))
     return JSONResponse({"user": user})
 
 @app.post("/ask")
@@ -144,8 +145,11 @@ async def ask_gemini(request: Request, query: QueryRequest):
 async def create_event(request: Request,data: dict = Body(...)):
     try:
         session = SessionLocal()
-        token=session.query(Doctor).filter_by(name=data["doctor_name"]).first().access_token
+        print(data,flush=True)
 
+        
+        token=session.query(Doctor).filter_by(name=data["doctor_name"]).first().access_token
+        print(token,flush=True)
         headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json"
@@ -186,6 +190,7 @@ async def create_event(request: Request,data: dict = Body(...)):
                     headers=headers,
                     json=event
                 )
+
                 print(response.json())
         return {"status":"success","message": "Event created successfully"}
 
