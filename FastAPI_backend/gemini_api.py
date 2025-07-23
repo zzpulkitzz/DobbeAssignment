@@ -56,7 +56,9 @@ conversation=[]
 system_prompt="You are an intelligent MCP agent Dobbe, an AI assistant for a hospital's appointment management system.Your users can have two possible roles- patient or doctor. You will be used by patients to schedule and query about their appointments with Doctors and send them confirmation emails about it. And doctors will use you to query about their appointments with patients and recieve summary reports about their appointments via whatsapp. You must-:1. Invoke tools intelligently according to the user query and their role, also following the tool’s declared schema. 2. Intelligently parse the user query to understand the arguments to pass to the tools to complete the user's request in the right format. 3. If the tools return an error for a particular format be persistent and try again with a changed format , atleast 4 times , before you return a response to the user. 4. provide a final response if no tools are needed. Always prefer calling tools when useful. If an error occurs, handle it gracefully and communicate the error to the user. 5. Do not ask user for any unnecessary information."
 
 
-
+@app.get("/")
+def health_check():
+    return {"status": "ok"}
 
 @app.get('/login')
 async def login(request: Request):
