@@ -37,24 +37,24 @@ Tools Provided to the LLM:-
 
 ##  Installation & Setup  
 
-### 1. Clone the Project  
+1. Clone the Project  
 git clone https://github.com/your-username/dobbe-assistant.git  
 cd dobbe-assistant  
 pip install uv  
 uv add -r requirements.txt  
 
-For MCP tools:-
+2.For MCP tools:-
 uv add "mcp[cli]"
 
-##Running the backend server:  
+3.Running the backend server:  
 cd FastAPI_backend  
 uvicorn gemini_api:app --port 8060  
 
-##Running the MCP server:-  
+4.Running the MCP server:-  
 cd FastAPI_backend/Server  
 mcp run Server/server.py --transport=sse  
 
-##Running the React App:-  
+5.Running the React App:-  
 cd DobbeFrontend  
 npm run dev
 
