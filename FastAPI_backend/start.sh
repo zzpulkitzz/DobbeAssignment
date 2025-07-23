@@ -1,13 +1,13 @@
 #!/bin/bash
 
-set -e
+#set -e
 
-echo "=== Container boot ==="
-echo "PWD: $(pwd)"
-echo "Files:"
-ls -al
+#echo "=== Container boot ==="
+#echo "PWD: $(pwd)"
+#echo "Files:"
+#ls -al
 
 
 
-echo "Starting FastAPI server..."
-uvicorn gemini_api:app --host 0.0.0.0 --port 8000
+#echo "Starting FastAPI server..."
+#uvicorn gemini_api:app --host 0.0.0.0 --port 8000
