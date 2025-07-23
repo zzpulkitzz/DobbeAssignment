@@ -130,7 +130,7 @@ def get_user(request: Request):
 @app.post("/ask")
 async def ask_gemini(request: Request, query: QueryRequest):
     user_obj = request.session.get('user')
-    print("phone",user_obj.get("phonenum"))
+
     if user_obj:    
         user = {"name": user_obj.get("name"), "email": user_obj.get("email"),
         "whatsapp_number":user_obj.get("phonenum"),
