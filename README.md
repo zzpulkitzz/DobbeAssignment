@@ -14,12 +14,12 @@ It helps:
 
 ---
 
-##  Core Technologies**
+##  Core Technologies
 
 - **Google Gemini Flash 2.5**: Handles natural language understanding and tool orchestration.
 - **FastMCP**: The official Python SDK implementing the Model Context Protocol (MCP) for dynamic tool usage.
 
-##  Tools Provided to the LLM:-
+##  Tools Provided to the LLM  
 
 1. get_all_doctors():- Get the list of all registered doctors.
 2. get_doctor_availability:-Get the available slots for a doctor on a specific date.
