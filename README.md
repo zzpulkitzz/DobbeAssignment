@@ -43,19 +43,19 @@ cd dobbe-assistant
 pip install uv
 uv add -r requirements.txt
 
-For MCP tools:
+For MCP tools:-
 uv add "mcp[cli]"
 
-##Running the backend server:
-cd FastAPI_backend
-uvicorn gemini_api:app --port 8060
+##Running the backend server:  
+cd FastAPI_backend  
+uvicorn gemini_api:app --port 8060  
 
-##Running the MCP server
-cd FastAPI_backend/Server
-mcp run Server/server.py --transport=sse
+##Running the MCP server:-  
+cd FastAPI_backend/Server  
+mcp run Server/server.py --transport=sse  
 
-##Running the React App
-cd DobbeFrontend
+##Running the React App:-  
+cd DobbeFrontend  
 npm run dev
 
 
