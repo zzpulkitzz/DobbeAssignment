@@ -18,7 +18,8 @@ def print_available_tools(tools):
 
 
 async def call_gemini_with_mcp(query: str):
-    async with sse_client("http://"+os.getenv("API_URL")+":"+str(os.getenv("MCP_PORT"))+"/sse") as (read_stream, write_stream):
+    print("https://"+os.getenv("API_URL")+":"+str(os.getenv("MCP_PORT"))+"/sse")
+    async with sse_client("https://"+os.getenv("API_URL")+":"+str(os.getenv("MCP_PORT"))+"/sse") as (read_stream, write_stream):
         async with ClientSession(read_stream, write_stream) as session:
             await session.initialize()
             response = await gemini_client.aio.models.generate_content(
