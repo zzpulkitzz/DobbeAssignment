@@ -7,5 +7,5 @@ url.register_tools(mcp)
 Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
-    mcp.run(host="0.0.0.0")
+    mcp.run(host="0.0.0.0",port=int(os.environ.get("PORT", 8000)))
     
