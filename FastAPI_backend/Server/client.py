@@ -1,7 +1,7 @@
 import os
 import asyncio
-from mcp import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
+from fastmcp import Client
+
 from dotenv import load_dotenv
 from google import genai
 
@@ -13,22 +13,14 @@ def print_available_tools(tools):
     print("Available tools:", [t.name for t in tools.tools])
 
 async def call_gemini_with_mcp(query: str):
-    # Construct URL for Streamable HTTP MCP endpoint
-    protocol = "https"
-    base = os.getenv("MCP_URL")
-
-    # Standard MCP HTTP mount path is /mcp
-    url = f"{protocol}://{base}/mcp"
+    url = f"https://{os.getenv('MCP_URL')}/mcp"
     print("Connecting to:", url)
 
-    # Client auto-inferring HTTP transport
-    async with streamablehttp_client(url) as (
-        read_stream,
-        write_stream,
-        get_session_id,
-    ):
-         async with ClientSession(read_stream, write_stream) as session:
-            # Initialize the connection
+    async with Client(url) as client:
+        tools = await client.list_tools()
+        print("Tools:", [t.name for t in tools.tools])
+        
+        async with client.session() as session:
             await session.initialize()
             response = await gemini_client.aio.models.generate_content(
                 model="gemini-2.5-flash",
