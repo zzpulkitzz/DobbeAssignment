@@ -1,7 +1,7 @@
 import os
 import asyncio
 from mcp import ClientSession
-lient
+
 from dotenv import load_dotenv
 from google import genai
 
