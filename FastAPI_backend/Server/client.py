@@ -1,7 +1,7 @@
 import os
 import asyncio
 from mcp import ClientSession
-from fastmcp import Client
+lient
 from dotenv import load_dotenv
 from google import genai
 
@@ -22,11 +22,13 @@ async def call_gemini_with_mcp(query: str):
     print("Connecting to:", url)
 
     # Client auto-inferring HTTP transport
-    async with Client(url) as client:
-        tools = await client.list_tools()
-        print_available_tools(tools)
-        # Initialize session
-        async with client.session() as session:
+    async with streamablehttp_client(url) as (
+        read_stream,
+        write_stream,
+        get_session_id,
+    ):
+         async with ClientSession(read_stream, write_stream) as session:
+            # Initialize the connection
             await session.initialize()
             response = await gemini_client.aio.models.generate_content(
                 model="gemini-2.5-flash",
