@@ -17,16 +17,14 @@ async def call_gemini_with_mcp(query: str):
     print("Connecting to:", url)
 
     async with Client(url) as client:
-        async with client.session() as session:
-            await session.initialize()
-            response = await gemini_client.aio.models.generate_content(
+        response = await gemini_client.aio.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=query,
                 config=genai.types.GenerateContentConfig(
-                    temperature=0, tools=[session]
+                    temperature=0, tools=[client]
                 )
             )
-            return response.text
+        return response.text
 
 async def handleQuery(query: str):
     return await call_gemini_with_mcp(query)
