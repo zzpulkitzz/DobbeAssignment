@@ -17,8 +17,7 @@ async def call_gemini_with_mcp(query: str):
     print("Connecting to:", url)
 
     async with Client(url) as client:
-        tools = await client.list_tools()
-        print("Tools:", [t.name for t in tools.tools])
+        
         
         async with client.session() as session:
             await session.initialize()
