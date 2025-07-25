@@ -15,7 +15,7 @@ def print_available_tools(tools):
 async def call_gemini_with_mcp(query: str):
     # Construct URL for Streamable HTTP MCP endpoint
     protocol = "https"
-    base = os.getenv("API_URL")
+    base = os.getenv("MCP_URL")
     port = os.getenv("MCP_PORT")
     # Standard MCP HTTP mount path is /mcp
     url = f"{protocol}://{base}:{port}/mcp"
