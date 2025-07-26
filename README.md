@@ -4,7 +4,7 @@
 
 ---
 
-### 🌐 Website Live
+### Website Live
 [Visit Website](https://dobbeassignment-production.up.railway.app/)
 
 ---
