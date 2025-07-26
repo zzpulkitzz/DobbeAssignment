@@ -4,6 +4,11 @@
 
 ---
 
+### 🌐 Live Demo
+[Visit Website](https://your-app.onrender.com)
+
+---
+
 ##  Smart Healthcare Assistant
 
 This is an agentic web app for managing doctor appointments, powered by AI and context-aware scheduling.
