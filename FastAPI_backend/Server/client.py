@@ -14,7 +14,7 @@ def print_available_tools(tools):
 
 async def call_gemini_with_mcp(query: str):
 
-    url = f"https://{os.getenv('MCP_URL')}/mcp"
+    url = f"http://{os.getenv('MCP_URL')}/mcp"
     print("Connecting to:", url)
 
     async with Client(url) as client:
