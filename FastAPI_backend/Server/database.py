@@ -19,7 +19,7 @@ engine = create_engine(DATABASE_URL, echo=False)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-try:
+"""try:
     session = SessionLocal()
     for i in ["Dr. Alice","Dr. Bob","Dr. Carol"]:
         doctor=Doctor(name=i,email=i[4:]+"@doctor.com",phonenum="1234567890",access_token="",refresh_token="")
@@ -28,7 +28,7 @@ try:
 except Exception as e:
     print(e)
 finally:
-    session.close()
+    session.close()"""
 
 def createUser(email,name,access_token,refresh_token):
     session = SessionLocal()
