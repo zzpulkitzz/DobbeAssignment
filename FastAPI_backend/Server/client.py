@@ -13,6 +13,7 @@ def print_available_tools(tools):
     print("Available tools:", [t.name for t in tools.tools])
 
 async def call_gemini_with_mcp(query: str):
+
     url = f"https://{os.getenv('MCP_URL')}/mcp"
     print("Connecting to:", url)
 
@@ -21,7 +22,7 @@ async def call_gemini_with_mcp(query: str):
                 model="gemini-2.5-flash",
                 contents=query,
                 config=genai.types.GenerateContentConfig(
-                    temperature=0, tools=[client]
+                    temperature=0, tools=[client.session]
                 )
             )
         return response.text
