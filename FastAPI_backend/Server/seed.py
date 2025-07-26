@@ -29,21 +29,8 @@ def seed():
         session.commit()
 
         # Fetch doctors with IDs
-        doctors = session.query(Doctor).all()
-        base_date = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)
-        appointments = []
-        for i, doctor in enumerate(doctors):
-            for j in range(3):
-                appointments.append(
-                    Appointment(
-                        doctor_id=doctor.id,
-                        patient_email="gpulkitgupta72@gmail.com",
-                        start_time=base_date + timedelta(hours=j, days=i)
-                    )
-                )
-        #session.add_all(appointments)
-        #session.commit()
-        #print("Sample data inserted!")
+        
+        print("Sample data inserted!")
     finally:
         session.close()
 
@@ -51,7 +38,7 @@ def addCol():
         
 
         # Replace with your actual PostgreSQL connection string
-        DATABASE_URL = "postgresql://pulkit@localhost:5432/ai_agent_db"
+        
 
         # Connect using the URL
         conn = psycopg2.connect(DATABASE_URL)
@@ -60,9 +47,7 @@ def addCol():
         # SQL query to add a new column
         alter_table_query = '''
         ALTER TABLE doctors
-        ADD COLUMN phonenum VARCHAR(255);
-        
-        '''
+        ADD COLUMN phonenum VARCHAR(255);'''
 
         try:
             cur.execute(alter_table_query)
@@ -85,6 +70,6 @@ def deleteEntry():
         session.close()
 
 if __name__ == "__main__":
-    deleteEntry()
+    seed()
 
 

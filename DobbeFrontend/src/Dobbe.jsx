@@ -58,7 +58,7 @@ const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
       text: "Does Dr. Carol work here"
     },
     {
-      text: "Is Dr. Gupta free tomorrow?"
+      text: "Is Dr. Alice free tomorrow?"
     }
   ];
 

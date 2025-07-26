@@ -6,7 +6,7 @@ def log_all_data():
     try:
         token = session.query(Doctor).all()
         for doctor in token:
-            print(doctor.phonenum)
+            print(doctor.name)
         
     finally:
         session.close()
