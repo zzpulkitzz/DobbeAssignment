@@ -73,7 +73,7 @@ const SuggestionQueries = ({ onSuggestionClick, user, showSuggestions }) => {
       text: "List all my patients for tomorrow"
     },
     {
-      text: "Show patient medical history for John Doe"
+      text: "Send me a summary report for the next week"
     }
   ];
 
