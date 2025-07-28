@@ -1,28 +1,27 @@
-from fastapi import FastAPI,Request,Depends,Body
+from fastapi import FastAPI,Request,Body
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse,RedirectResponse
 import os
 from dotenv import load_dotenv
 from google import genai
 from Server.client import handleQuery
-from Server.database import createUser
-from fastapi.responses import RedirectResponse, JSONResponse
 from authlib.integrations.starlette_client import OAuth
-from starlette.config import Config
 from starlette.middleware.sessions import SessionMiddleware
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from Server.models import User,Doctor
-from Server.url import AppointmentInput
 from datetime import datetime
 from datetime import timedelta
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
+from sqlalchemy import inspect
 load_dotenv()
 gemini_client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 app = FastAPI()
 engine = create_engine(os.getenv("DATABASE_URL"))
+inspector = inspect(engine)
+print(inspector.get_table_names())
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -64,7 +63,6 @@ def health_check():
 async def login(request: Request):
     redirect_uri = request.url_for('auth_callback')
     role = request.query_params.get('role')
-    print(role)
     return await oauth.google.authorize_redirect(request, redirect_uri,state=role)
 
 @app.get('/logout')
@@ -75,12 +73,10 @@ async def logout(request: Request):
 @app.get('/auth/callback')
 async def auth_callback(request: Request):
     role = request.query_params.get('state')
-    print("sdc",role)
     token = await oauth.google.authorize_access_token(request)
     session = SessionLocal()
     user = session.query(Doctor).filter_by(email=token['userinfo']['email']).first()
-    
-    print("bdshvbjds",user)
+
     if role=="doctor":
         if user:
             user.access_token = token['access_token']
@@ -147,11 +143,7 @@ async def ask_gemini(request: Request, query: QueryRequest):
 async def create_event(request: Request,data: dict = Body(...)):
     try:
         session = SessionLocal()
-        print(data,flush=True)
-
-        
         token=session.query(Doctor).filter_by(name=data["doctor_name"]).first().access_token
-        print(token,flush=True)
         headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json"
