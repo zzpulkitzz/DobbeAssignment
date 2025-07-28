@@ -1,10 +1,10 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
+import os
 # Replace with your Gmail account
 GMAIL_USER = "gpulkitgupta72@gmail.com"
-GMAIL_PASSWORD = "xwgb bbvc rakk wmsc"  # NOT your real Gmail password
+GMAIL_PASSWORD = os.getenv("GMAIL_PASSWORD")  
 
 def send_email_confirmation(data):
     """
