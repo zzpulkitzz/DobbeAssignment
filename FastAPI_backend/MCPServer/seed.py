@@ -1,5 +1,5 @@
 from database import SessionLocal
-from Server.models import Doctor, Appointment
+from MCPServer.models import Doctor, Appointment
 from datetime import datetime, timedelta
 import psycopg2
 

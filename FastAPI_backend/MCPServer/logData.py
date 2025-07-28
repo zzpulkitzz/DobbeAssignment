@@ -1,5 +1,5 @@
 from database import SessionLocal
-from Server.models import Doctor, Appointment
+from MCPServer.models import Doctor, Appointment
 
 def log_all_data():
     session = SessionLocal()

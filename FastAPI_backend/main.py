@@ -4,12 +4,12 @@ from fastapi.responses import JSONResponse,RedirectResponse
 import os
 from dotenv import load_dotenv
 from google import genai
-from Server.client import handleQuery
+from MCPServer.client import handleQuery
 from authlib.integrations.starlette_client import OAuth
 from starlette.middleware.sessions import SessionMiddleware
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from Server.models import User,Doctor
+from MCPServer.models import User,Doctor
 from datetime import datetime
 from datetime import timedelta
 from fastapi.middleware.cors import CORSMiddleware

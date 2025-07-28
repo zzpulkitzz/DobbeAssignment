@@ -1,6 +1,6 @@
 from mcp.server.fastmcp import FastMCP
 from database import engine
-from Server.base import Base
+from MCPServer.base import Base
 import url  
 mcp = FastMCP("DoctorScheduler", description="Doctor appointment and reporting tools",host="0.0.0.0")
 

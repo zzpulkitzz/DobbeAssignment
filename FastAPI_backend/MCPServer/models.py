@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date, Time, ForeignKey
-from Server.base import Base
+from MCPServer.base import Base
 from datetime import datetime
 from sqlalchemy import Text
 

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 
 from sqlalchemy.orm import Session, sessionmaker
 
-from Server.models import Doctor, Appointment,User
+from MCPServer.models import Doctor, Appointment,User
 from datetime import datetime, time, timedelta
 import os
 from dotenv import load_dotenv

@@ -1,6 +1,6 @@
 
 import httpx
-from Server.database import store_appointment
+from MCPServer.database import store_appointment
 import asyncio
 import os
 async def test_store_appointment(data):

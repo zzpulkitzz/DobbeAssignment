@@ -2,13 +2,14 @@ from fastapi import APIRouter,Request
 from pydantic import BaseModel, field_validator
 from typing import List
 from datetime import date,datetime
-from Server.database import get_availability_for_doctor, store_appointment
+from MCPServer.database import get_availability_for_doctor, store_appointment
 
-from Server.Email.email_utils import send_email_confirmation
-from Server.database import listDoctors
+from MCPServer.Email.email_utils import send_email_confirmation
+from MCPServer.database import listDoctors
 import httpx
 from twilio.rest import Client
 import os
+from datetime import datetime
 
 
 router = APIRouter()
@@ -31,7 +32,11 @@ class AvailabilityInput(BaseModel):
         if not isinstance(v, str) or not v.startswith("Dr."):
             raise ValueError('doctor_name must start with "Dr."')
         return v
+    
+    
 
+
+print(os.getenv("API_URI")+"create_event")
 
 class Slot(BaseModel):
     time: str
@@ -44,6 +49,32 @@ class AppointmentInput(BaseModel):
     start_time: str
     email: str
 
+    @field_validator("start_time", mode="before")
+    def validate_start_time(cls, v):
+        try:
+            t = datetime.strptime(v, "%H:%M").time()
+        except ValueError:
+            raise ValueError("start_time must be in HH:MM 24-hour format")
+        if not (9 <= t.hour < 17 or (t.hour == 17 and t.minute == 0)):
+            raise ValueError("start_time must be between 09:00 and 17:00")
+        if t.minute not in (0, 30):
+            raise ValueError("start_time must be in multiples of 30 minutes (e.g., 09:00, 09:30, ...)")
+        return v
+
+    @field_validator("date", mode="before")
+    def validate_date(cls, v):
+        
+        try:
+            datetime.strptime(v, "%d-%m-%Y")
+        except ValueError:
+            raise ValueError("date must be DD-MM-YYYY")
+        return v
+
+    @field_validator("doctor_name", mode="before")
+    def validate_doctor_name(cls, v):
+        if not isinstance(v, str) or not v.startswith("Dr."):
+            raise ValueError('doctor_name must start with "Dr."')
+        return v
 
 class EventInput(BaseModel):
     summary: str
@@ -51,6 +82,8 @@ class EventInput(BaseModel):
     start_time: str 
     end_time: str
     email: str
+
+    
 
 def register_tools(mcp):
     @mcp.tool()
@@ -91,7 +124,8 @@ def register_tools(mcp):
 
 
         async with httpx.AsyncClient() as client:
-            response = await client.post(str(os.getenv("API_URL")+"create_event"),
+            
+            response = await client.post(str(os.getenv("API_URI")+"create_event"),
         json=data.model_dump() 
     )
         result2 = response.json()
