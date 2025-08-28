@@ -9,5 +9,5 @@ ls -al
 
 
 echo "Starting FastAPI server..."
-uvicorn gemini_api:app --host 0.0.0.0 
+uvicorn     main:app --host 0.0.0.0 
 

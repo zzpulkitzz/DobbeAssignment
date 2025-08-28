@@ -8,4 +8,4 @@ cd /Users/pulkit/claude-demo
 export $(grep -v '^#' .env | xargs)
 export PYTHONPATH=/Users/pulkit/claude-demo/FastAPI_backend
 
-/Users/pulkit/.local/bin/uv run --with "mcp[cli]" /Users/pulkit/claude-demo/FastAPI_backend/Server/server.py --transport=sse
+/Users/pulkit/.local/bin/uv run --with "mcp[cli]" /Users/pulkit/claude-demo/FastAPI_backend/MCPServer/server.py --transport=sse

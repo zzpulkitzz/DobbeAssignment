@@ -1,10 +1,10 @@
 from mcp.server.fastmcp import FastMCP
-from database import engine
+from MCPServer.database import engine
 from MCPServer.base import Base
-import url  
+import MCPServer.url  
 mcp = FastMCP("DoctorScheduler", description="Doctor appointment and reporting tools",host="0.0.0.0")
 
-url.register_tools(mcp)
+MCPServer.url.register_tools(mcp)
 Base.metadata.create_all(engine)
 
 

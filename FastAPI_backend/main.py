@@ -150,8 +150,7 @@ async def create_event(request: Request,data: dict = Body(...)):
         }
         date_today = datetime.strptime(data["date"], "%d-%m-%Y").date()  
 
-    # Parse start time and calculate end time
-    # Zero-pad hour and minute for ISO format
+    
         time_parts = data['start_time'].split(':')
         hour = int(time_parts[0])
         minute = int(time_parts[1])
