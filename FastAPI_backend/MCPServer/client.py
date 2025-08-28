@@ -14,13 +14,10 @@ def print_available_tools(tools):
 
 async def call_gemini_with_mcp(query: str):
 
-    url = f"http://{os.getenv('MCP_URL')}/mcp"
+    url = f"https://{os.getenv('MCP_URL')}/mcp"
     print("Connecting to:", url)
-    headers = {
-        "Accept": "text/event-stream",
-        "Content-Type": "application/json"
-    }
-    async with Client(url, headers=headers) as client:
+
+    async with Client(url) as client:
         response = await gemini_client.aio.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=query,
