@@ -27,7 +27,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://dobbeassignment-j905.onrender.com"],
+    allow_origins=["https://dobbeassignment-1.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
