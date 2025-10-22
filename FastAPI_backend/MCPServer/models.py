@@ -31,7 +31,7 @@ class Appointment(Base):
     patient_email = Column(String, nullable=False)
     patient_name=Column(String, nullable=False)
     date=Column(Date)
-    start_time = Column(Time)
+    start_time =Column(Time)
 
 
 
